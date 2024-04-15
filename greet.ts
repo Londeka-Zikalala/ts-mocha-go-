@@ -1,9 +1,9 @@
 import Person from "./person";
 import { language } from "./language";
 import GreetIn from "./greetin";
-import { GreetInXhosa } from "./greetInXhosa";
-import { GreetInFrench } from "./greetInFrench";
-import { GreetInAfrikaans } from "./greetInAfrikaans";
+import GreetInXhosa from "./greetInXhosa";
+import GreetInFrench from "./greetInFrench";
+import GreetInAfrikaans from "./greetInAfrikaans";
 
 export default function greet(person: Person, chosenLanguage: language) {
     let greetIn: GreetIn;

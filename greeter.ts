@@ -1,6 +1,6 @@
 import { language } from "./language";
 import GreetIn from "./greetin";
-import { GreetInXhosa } from "./greetInXhosa";
+import GreetInXhosa from "./greetInXhosa";
 
 
 let theGreetInMap: Map<language, GreetIn> = new Map()
@@ -15,7 +15,7 @@ console.log(greeting.greet('Lindani'));
 
 // the Greeter class
 
-export class Greeter {
+export default class Greeter {
     //A map that has a languages enum as a key and a GreetIn interface instance as a value
     private greetLanguages: Map<language, GreetIn>;
     constructor(greetLanguages: Map<language, GreetIn>) {
