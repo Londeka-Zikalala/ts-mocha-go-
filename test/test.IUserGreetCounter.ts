@@ -2,7 +2,7 @@ import MapUserGreetCounter from "../IUserGreetCounter";
 import assert from "assert";
 
 describe('The MapUsergreetingsCounter class', function () {
-    it("should count the number of greetings", function () {
+    it("should count the number of greeted people", function () {
     let greetingsCounter = new MapUserGreetCounter()
     greetingsCounter.countGreet("Londeka");
     greetingsCounter.countGreet("Thando");
