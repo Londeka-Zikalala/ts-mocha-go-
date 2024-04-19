@@ -1,35 +1,29 @@
 import { language } from "./language";
-import GreetIn from "./greetin";
+import Greetable from "./greetable";
 import MapUserGreetCounter from "./IUserGreetCounter";
 
-
-export default class Greeter {
-    //A map that has a languages enum as a key and a GreetIn interface instance as a value
-    private greetLanguages: Map<language, GreetIn>;
+export default class Greeter implements Greetable {
+    private greetable: Greetable;
     private userGreetCounter: MapUserGreetCounter;
 
-    constructor(greetLanguages: Map<language, GreetIn>, userGreetCounter: MapUserGreetCounter) {
-        this.greetLanguages = greetLanguages;
+    constructor(greetable: Greetable, userGreetCounter: MapUserGreetCounter) {
+        this.greetable = greetable;
         this.userGreetCounter = userGreetCounter;
     }
 
-    greet(name: string, chosenLanguage: language) {
-        let greetIn = this.greetLanguages.get(chosenLanguage);
-        // keep track of how many users has been greeted
+    greet(name: string, chosenLanguage: language): Promise<string> {
+        // get the greeting message
+        let message = this.greetable.greet(name, chosenLanguage);
+        // manage the user count
         this.userGreetCounter.countGreet(name);
-        if (greetIn) {
-            return greetIn.greet(name);
-        }
-        return "";
+        return message;
     }
 
-       // call the greetCounter on the userGreetCounter
-       public get greetCounter(): number {
-        return this.userGreetCounter.greetCounter;
+    getGreetCounter(): Promise<number> {
+        return this.userGreetCounter.greetCounter();
     }
-    
-    // call the userGreetCount on the userGreetCounter
-    userGreetCount(firstName: string): number {
-        return this.userGreetCounter.userGreetCount(firstName);
+
+     userGreetCount(firstName: string): Promise<number> {
+        return  this.userGreetCounter.userGreetCount(firstName);
     }
 }

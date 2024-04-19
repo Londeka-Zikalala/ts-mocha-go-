@@ -7,7 +7,7 @@ export default class MapUserGreetCounter implements userGreetCounter {
         this.theGreetedUsers = new Map<string, number>();
     }
 
-    countGreet(firstName: string): void {
+    async countGreet(firstName: string): Promise<void> {
         if (this.theGreetedUsers.has(firstName)) {
             const count = this.theGreetedUsers.get(firstName) || 0;
             this.theGreetedUsers.set(firstName, count + 1);
@@ -16,11 +16,11 @@ export default class MapUserGreetCounter implements userGreetCounter {
         }
     }
 
-    get greetCounter(): number {
+    async greetCounter(): Promise<number> {
         return this.theGreetedUsers.size;
     }
 
-    userGreetCount(firstName: string): number {
+    async userGreetCount(firstName: string): Promise<number> {
         return this.theGreetedUsers.get(firstName) || 0;
     }
 }

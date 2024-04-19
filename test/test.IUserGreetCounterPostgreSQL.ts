@@ -10,10 +10,7 @@ describe('IUserGreetCounterSQL', function () {
         // Connect to the database before running tests
         await db.connect();
     });
-    after(async function () {
-        // Disconnect from the database after running tests
-        await db.$pool.end();
-    });
+    
     beforeEach( async function () {
         //Clear table
         await db.none(`TRUNCATE TABLE user_greet_counts RESTART IDENTITY CASCADE`)
@@ -60,5 +57,12 @@ describe('IUserGreetCounterSQL', function () {
         assert.equal(greetCount, 0);
     });
 
-    
+    after(async function () {
+        try {
+            // Disconnect from the database after running tests
+            await db.$pool.end();
+        } catch (error) {
+            console.error('Error occurred while closing the database connection:', error);
+        }
+    });
 });
