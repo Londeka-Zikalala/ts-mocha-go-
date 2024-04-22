@@ -1,30 +1,31 @@
-import IUserGreetCounterSQL from "../IUserGreetCounterPostgreSQL";
+import UserGreetCounterSQL from "../UserGreetCounterPostgreSQL";
 import assert from "assert";
 import db from "../db";
 
+describe('UserGreetCounterSQL', function () {
+    let counter: UserGreetCounterSQL;
 
-describe('IUserGreetCounterSQL', function () {
-    let counter: IUserGreetCounterSQL;
-    this.timeout(60000)
+    this.timeout(10000);
+
     before(async function() {
         // Connect to the database before running tests
         await db.connect();
     });
     
     beforeEach( async function () {
-        //Clear table
-        await db.none(`TRUNCATE TABLE user_greet_counts RESTART IDENTITY CASCADE`)
+        // Clear table
+        await db.none(`TRUNCATE TABLE user_greet_counts RESTART IDENTITY CASCADE`);
         // Reset the counter before each test
-        counter = new IUserGreetCounterSQL();
+        counter = new UserGreetCounterSQL(db);
     });
 
     it('should increment greet count for a new user', async function () {
         await counter.countGreet('Andre');
-        await counter.countGreet('Londeka')
-        await counter.countGreet('Londeka')
-        await counter.countGreet('Thandeka')
+        await counter.countGreet('Londeka');
+        await counter.countGreet('Londeka');
+        await counter.countGreet('Thandeka');
         const greetCount = await counter.greetCounter();
-        assert.equal(greetCount,3 );
+        assert.equal(greetCount, 3);
     });
 
     it('should increment greet count for an existing user', async function () {
@@ -44,11 +45,11 @@ describe('IUserGreetCounterSQL', function () {
     it('should return greet count for a specific user', async function () {
         await counter.countGreet('Londeka');
         await counter.countGreet('Londeka');
-        await counter.countGreet('Andre')
+        await counter.countGreet('Andre');
         const greetCount1 = await counter.userGreetCount('Londeka');
-        const greetCount2 = await counter.userGreetCount('Andre')
+        const greetCount2 = await counter.userGreetCount('Andre');
         assert.equal(greetCount1, 2);
-        assert.equal(greetCount2, 1)
+        assert.equal(greetCount2, 1);
     });
 
     it('should return 0 greet count for non-existing user', async function () {

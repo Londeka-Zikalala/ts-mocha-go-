@@ -1,4 +1,4 @@
-import GreetInXhosa from "../greetInXhosa";
+import GreetInXhosa from "../GreetInXhosa";
 import assert from "assert";
 
 describe('The greetInXhosa function', function () {

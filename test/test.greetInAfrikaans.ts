@@ -1,4 +1,4 @@
-import GreetInAfrikaans from "../greetInAfrikaans";
+import GreetInAfrikaans from "../GreetInAfrikaans";
 import assert from "assert";
 
 describe('The greetInAfrikaans function', function () {

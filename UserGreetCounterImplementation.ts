@@ -1,6 +1,5 @@
-import userGreetCounter from "./userGreetCounter";
-
-export default class MapUserGreetCounter implements userGreetCounter {
+import UserGreetCounter from "./UserGreetCounter";
+export default class MapUserGreetCounter implements UserGreetCounter {
     private theGreetedUsers: Map<string, number>;
 
     constructor() {

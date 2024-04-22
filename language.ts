@@ -1,4 +1,4 @@
-export enum language{
+export enum Language{
     french, 
     afr,
     xhosa

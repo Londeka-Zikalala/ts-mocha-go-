@@ -1,16 +1,16 @@
 import Person from "./person";
-import { language } from "./language";
-import GreetIn from "./greetin";
-import GreetInXhosa from "./greetInXhosa";
-import GreetInFrench from "./greetInFrench";
-import GreetInAfrikaans from "./greetInAfrikaans";
+import { Language } from "./Language";
+import GreetIn from "./Greetin";
+import GreetInXhosa from "./GreetInXhosa";
+import GreetInFrench from "./GreetInFrench";
+import GreetInAfrikaans from "./GreetInAfrikaans";
 
-export default function greet(person: Person, chosenLanguage: language) {
+export default function greet(person: Person, chosenLanguage: Language) {
     let greetIn: GreetIn;
 
-    if (chosenLanguage === language.french) {
+    if (chosenLanguage === Language.french) {
         greetIn = new GreetInFrench();
-    } else if (chosenLanguage === language.afr) {
+    } else if (chosenLanguage === Language.afr) {
         greetIn = new GreetInAfrikaans();
     } else {
         greetIn = new GreetInXhosa();

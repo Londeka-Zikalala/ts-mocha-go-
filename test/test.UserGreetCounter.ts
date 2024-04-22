@@ -1,4 +1,4 @@
-import MapUserGreetCounter from "../IUserGreetCounter";
+import MapUserGreetCounter from "../UserGreetCounterImplementation";
 import assert from "assert";
 
 describe('The MapUsergreetingsCounter class',  function () {
