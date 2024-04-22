@@ -2,6 +2,7 @@ import { IDatabase } from 'pg-promise';
 import Greetable from './greetable';
 import { Language } from './Language';
 
+
 export default class GreeterPSQL implements Greetable {
   constructor(private db: IDatabase<any>) {}
 
