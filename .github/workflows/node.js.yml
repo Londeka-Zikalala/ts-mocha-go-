@@ -1,13 +1,10 @@
-# This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests across different versions of node
-# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-nodejs
-
-name: Node.js CI
+name: NodeJS CI with PostgreSQL - now
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [master]
   pull_request:
-    branches: [ "main" ]
+    branches: [master]
 
 jobs:
   build:
@@ -17,17 +14,29 @@ jobs:
     strategy:
       matrix:
         node-version: [16.x, 18.x]
-        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
-    env: 
-      DATABASE_URL:  postgres://xwsxwnpg:S78i3qyaybp1nfAeI-U0tQQ-4foxMh36@ella.db.elephantsql.com/xwsxwnpg
+
+    services:
+      postgres:
+        image: postgres:latest
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: Coder123
+          POSTGRES_DB: ts_mocha_db
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
     steps:
-    - uses: actions/checkout@v3
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v3
-      with:
-        node-version: ${{ matrix.node-version }}
-        cache: 'npm'
-    - run: npm ci
-    - run: npm run build --if-present
-    - run: npm test -- --exit
-    
+      - uses: actions/checkout@v3
+      - name: Install dependencies
+        run: npm install
+      - name: Create PostgreSQL tables
+        run: PGPASSWORD=coder123 psql -h localhost -U coder -d ts_mocha_db -a -f ./tables.sql
+      - name: Run tests with PostgreSQL
+        run: npm test
+        env:
+          DATABASE_URL: postgres://postgres:Coder123@localhost:5432/ts_mocha_db

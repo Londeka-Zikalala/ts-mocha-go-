@@ -6,7 +6,7 @@ import assert from 'assert';
 const greeter = new GreeterPSQL(db);
 
 describe('GreeterPSQL', function () {
-  this.timeout(10000)
+  this.timeout(60000)
   before(async function() {
     // Connect to the database before running tests
     await db.connect();

@@ -10,3 +10,10 @@ CREATE TABLE users (
     id SERIAL PRIMARY KEY,
     firstname VARCHAR(255) NOT NULL
 );
+
+-- Counter table
+CREATE TABLE user_greet_count (
+    id SERIAL PRIMARY KEY,
+    firstname VARCHAR(255) NOT NULL UNIQUE,
+    no_of_greets INTEGER
+);
