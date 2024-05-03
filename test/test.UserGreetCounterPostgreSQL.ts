@@ -9,7 +9,7 @@ describe('UserGreetCounterSQL', function () {
     
     beforeEach( async function () {
         // Clear table
-        await db.none(`TRUNCATE TABLE user_greet_count RESTART IDENTITY CASCADE`);
+        await db.none(`TRUNCATE TABLE user_greet_counts RESTART IDENTITY CASCADE`);
         // Reset the counter before each test
         counter = new UserGreetCounterSQL(db);
     });
