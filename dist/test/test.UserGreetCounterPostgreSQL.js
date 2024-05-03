@@ -18,12 +18,12 @@ const db_1 = __importDefault(require("../db"));
 describe('UserGreetCounterSQL', function () {
     let counter;
     this.timeout(10000);
-    before(function () {
-        return __awaiter(this, void 0, void 0, function* () {
-            // Connect to the database before running tests
-            yield db_1.default.connect();
-        });
-    });
+    // before(function () {
+    //     return __awaiter(this, void 0, void 0, function* () {
+    //         // Connect to the database before running tests
+    //         yield db_1.default.connect();
+    //     });
+    // });
     beforeEach(function () {
         return __awaiter(this, void 0, void 0, function* () {
             // Clear table

@@ -19,12 +19,12 @@ const assert_1 = __importDefault(require("assert"));
 const greeter = new GreeterPSQL_1.default(db_1.default);
 describe('GreeterPSQL', function () {
     this.timeout(10000);
-    before(function () {
-        return __awaiter(this, void 0, void 0, function* () {
-            // Connect to the database before running tests
-            yield db_1.default.connect();
-        });
-    });
+    // before(function () {
+    //     return __awaiter(this, void 0, void 0, function* () {
+    //         // Connect to the database before running tests
+    //         yield db_1.default.connect();
+    //     });
+    // });
     beforeEach(function () {
         return __awaiter(this, void 0, void 0, function* () {
             // Clear existing test data

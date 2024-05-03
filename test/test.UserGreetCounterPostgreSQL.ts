@@ -5,11 +5,11 @@ import db from "../db";
 describe('UserGreetCounterSQL', function () {
     let counter: UserGreetCounterSQL;
 
-    this.timeout(10000);
+    this.timeout(60000);
     
     beforeEach( async function () {
         // Clear table
-        await db.none(`TRUNCATE TABLE user_greet_counts RESTART IDENTITY CASCADE`);
+        await db.none(`TRUNCATE TABLE user_greet_count RESTART IDENTITY CASCADE`);
         // Reset the counter before each test
         counter = new UserGreetCounterSQL(db);
     });

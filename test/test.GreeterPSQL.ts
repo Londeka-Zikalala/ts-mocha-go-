@@ -34,8 +34,8 @@ describe('GreeterPSQL', function () {
 
     }
   });
-  after(async function () {
-    // Disconnect from the database after the tests
-    await db.$pool.end();
-  });
+  // after(async function () {
+  //   // Disconnect from the database after the tests
+  //   await db.$pool.end();
+  // });
 });

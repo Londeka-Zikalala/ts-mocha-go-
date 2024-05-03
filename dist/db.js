@@ -15,9 +15,6 @@ if (process.env.DATABASE_URL && !local) {
 }
 // which db connection to use
 const connectionString = process.env.DATABASE_URL || '';
-if (!connectionString) {
-    throw new Error("DATABASE_URL environment variable is not defined.");
-}
+
 const db = pgp(connectionString);
-db.connect();
 exports.default = db;

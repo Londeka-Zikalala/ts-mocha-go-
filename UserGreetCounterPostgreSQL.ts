@@ -10,17 +10,17 @@ export default class UserGreetCounterSQL implements UserGreetCounter {
         try {
             if (firstName) {
                 const user = await this.db.oneOrNone(
-                    'SELECT * FROM user_greet_counts WHERE firstname = $1',
+                    'SELECT * FROM user_greet_count WHERE firstname = $1',
                     [firstName]
                 );
                 if (!user) {
                     await this.db.none(
-                        `INSERT INTO  user_greet_counts (firstname, no_of_greets) VALUES ($1, $2)`,
+                        `INSERT INTO  user_greet_count (firstname, no_of_greets) VALUES ($1, $2)`,
                         [firstName, 1]
                     );
                 } else {
                     await this.db.none(
-                        `UPDATE user_greet_counts SET no_of_greets = no_of_greets + 1 WHERE firstname = $1`,
+                        `UPDATE user_greet_count SET no_of_greets = no_of_greets + 1 WHERE firstname = $1`,
                         [firstName]
                     );
                 }
@@ -33,7 +33,7 @@ export default class UserGreetCounterSQL implements UserGreetCounter {
     async greetCounter(): Promise<number> {
         try {
             const greetedNames = await this.db.manyOrNone(
-                `SELECT firstname FROM user_greet_counts`
+                `SELECT firstname FROM user_greet_count`
             );
             return greetedNames.length;
         } catch (error) {
@@ -45,7 +45,7 @@ export default class UserGreetCounterSQL implements UserGreetCounter {
     async userGreetCount(firstName: string): Promise<number> {
         try {
             const user = await this.db.oneOrNone(
-                `SELECT * FROM user_greet_counts WHERE firstname = $1`,
+                `SELECT * FROM user_greet_count WHERE firstname = $1`,
                 [firstName]
             );
             return user ? user.no_of_greets : 0;
