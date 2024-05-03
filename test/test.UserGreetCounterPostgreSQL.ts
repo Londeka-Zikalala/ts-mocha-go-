@@ -6,11 +6,6 @@ describe('UserGreetCounterSQL', function () {
     let counter: UserGreetCounterSQL;
 
     this.timeout(10000);
-
-    before(async function() {
-        // Connect to the database before running tests
-        await db.connect();
-    });
     
     beforeEach( async function () {
         // Clear table
@@ -57,13 +52,8 @@ describe('UserGreetCounterSQL', function () {
         const greetCount = await counter.userGreetCount('Thando');
         assert.equal(greetCount, 0);
     });
-
     after(async function () {
-        try {
-            // Disconnect from the database after running tests
-            await db.$pool.end();
-        } catch (error) {
-            console.error('Error occurred while closing the database connection:', error);
-        }
-    });
+        // Disconnect from the database after the tests
+        await db.$pool.end();
+      });
 });

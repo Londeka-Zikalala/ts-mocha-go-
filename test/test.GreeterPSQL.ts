@@ -7,10 +7,6 @@ const greeter = new GreeterPSQL(db);
 
 describe('GreeterPSQL', function () {
   this.timeout(60000)
-  before(async function() {
-    // Connect to the database before running tests
-    await db.connect();
-  });
 
   beforeEach(async function () {
     // Clear existing test data
@@ -38,13 +34,8 @@ describe('GreeterPSQL', function () {
 
     }
   });
-
   after(async function () {
-    try {
-        // Disconnect from the database after running tests
-        await db.$pool.end();
-    } catch (error) {
-        console.error('Error occurred while closing the database connection:', error);
-    }
+    // Disconnect from the database after the tests
+    await db.$pool.end();
   });
 });
